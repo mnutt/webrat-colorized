@@ -10,6 +10,10 @@ Colorizes html output for failed webrat assertions
 
 * html5 0.10.0 (rubyforge, http://github.com/mnutt/html5)
 
+== KNOWN ISSUES:
+
+* Printing doctypes does not include all doctype information
+
 == INSTALL:
 
 * sudo gem install webrat-colorized

@@ -1,11 +1,11 @@
 $LOAD_PATH.unshift File.dirname(__FILE__)
-require 'webrat_colorized/html5'
+require 'webrat_colorized/nokogiri_extensions'
 require 'webrat_colorized/webrat_extensions'
 
 module WebratColorized
 
   # :stopdoc:
-  VERSION = '1.0.0'
+  VERSION = '0.4.0'
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -32,10 +32,9 @@ module WebratColorized
     args.empty? ? PATH : ::File.join(PATH, args.flatten)
   end
 
-  def self.colorize(html)
-    parser = HTML5::HTMLParser.new(:tree => HTML5::TreeBuilders['simpletree'])
-    document = parser.parse_fragment(html)
-    document.hilite
+  def self.hilight(document)
+    document.decorate_bash_hilight!
+    document.bash_hilight
   end
 
 end  # module WebratColorized
