@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift File.dirname(__FILE__)
+require 'webrat_colorized/html5'
+require 'webrat_colorized/webrat_extensions'
 
 module WebratColorized
 
@@ -29,21 +32,10 @@ module WebratColorized
     args.empty? ? PATH : ::File.join(PATH, args.flatten)
   end
 
-  # Utility method used to require all files ending in .rb that lie in the
-  # directory below this file that has the same name as the filename passed
-  # in. Optionally, a specific _directory_ name can be passed in such that
-  # the _filename_ does not have to be equivalent to the directory.
-  #
-  def self.require_all_libs_relative_to( fname, dir = nil )
-    dir ||= ::File.basename(fname, '.*')
-    search_me = ::File.expand_path(
-        ::File.join(::File.dirname(fname), dir, '**', '*.rb'))
-
-    Dir.glob(search_me).sort.each {|rb| require rb}
+  def self.colorize(html)
+    parser = HTML5::HTMLParser.new(:tree => HTML5::TreeBuilders['simpletree'])
+    document = parser.parse_fragment(html) rescue parser.parse(html)
+    document.hilite
   end
 
 end  # module WebratColorized
-
-WebratColorized.require_all_libs_relative_to(__FILE__)
-
-# EOF
