@@ -1,7 +1,3 @@
-# Look in the tasks/setup.rb file for the various options that can be
-# configured in this Rakefile. The .rake files in the tasks directory
-# are where the options are used.
-
 begin
   require 'bones'
   Bones.setup
@@ -14,14 +10,14 @@ rescue LoadError
 end
 
 ensure_in_path 'lib'
-require 'webrat-colorized'
+require 'webrat_colorized'
 
 task :default => 'spec:run'
 
 PROJ.name = 'webrat-colorized'
-PROJ.authors = 'FIXME (who is writing this software)'
-PROJ.email = 'FIXME (your e-mail)'
-PROJ.url = 'FIXME (project homepage)'
+PROJ.authors = 'Michael Nutt'
+PROJ.email = 'michael@nuttnet.net'
+PROJ.url = 'http://github.com/mnutt/webrat-colorized'
 PROJ.version = WebratColorized::VERSION
 PROJ.rubyforge.name = 'webrat-colorized'
 
