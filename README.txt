@@ -8,7 +8,8 @@ Colorizes html output for failed webrat assertions
 
 == REQUIREMENTS:
 
-* html5 0.10.0 (rubyforge, http://github.com/mnutt/html5)
+* term-ansicolors 1.0.4
+* nokogiri 1.4.1
 
 == KNOWN ISSUES:
 
