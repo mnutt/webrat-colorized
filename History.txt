@@ -1,4 +1,7 @@
-== 1.0.0 / 2010-01-24
+== 0.4.1 / 2010-01-24
 
-* 1 major enhancement
-  * Birthday!
+* ability to render nokogiri NodeSets (html fragments)
+
+== 0.4.0 / 2010-01-24
+
+* switch from html5 gem to nokogiri for html parsing
