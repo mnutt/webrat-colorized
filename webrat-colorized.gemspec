@@ -30,4 +30,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<bones>, [">= 2.5.1"])
   end
+
+  s.add_dependency("nokogiri", [">= 1.4.1"])
+  s.add_dependency("term-ansicolor", [">= 1.0.4"])
 end
