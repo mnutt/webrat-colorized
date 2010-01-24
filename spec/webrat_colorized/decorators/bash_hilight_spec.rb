@@ -3,7 +3,7 @@ require 'spec_helper'
 describe WebratColorized::Decorators::BashHilight do
   describe "#bash_hilight" do
     before do
-      @document = Nokogiri(<<-EOF
+      @document = Nokogiri <<-EOF
 <html>
   <body>
     <div id='element'><h1></h1></div>
@@ -13,7 +13,7 @@ describe WebratColorized::Decorators::BashHilight do
   </body>
 </html>
 EOF
-)
+      @document.send(:extend, WebratColorized::NokogiriExtensions::Document)
       @document.decorate_bash_hilight!
     end
     it "calls #bash_hilight_element for element nodes" do
@@ -55,6 +55,7 @@ EOF
   <body>#{@comment}</body>
 </html>
 EOF
+      @document.send(:extend, WebratColorized::NokogiriExtensions::Document)
       @document.decorate_bash_hilight!
       @hilighted = @document.at('body').children.first.bash_hilight
     end
@@ -76,6 +77,7 @@ EOF
   <body>#{@text}</body>
 </html>
 EOF
+      @document.send(:extend, WebratColorized::NokogiriExtensions::Document)
       @document.decorate_bash_hilight!
       @hilighted = @document.at('body').children.first.bash_hilight
     end
@@ -98,6 +100,7 @@ EOF
   </body>
 </html>
 EOF
+      @document.send(:extend, WebratColorized::NokogiriExtensions::Document)
       @document.decorate_bash_hilight!
       @hilighted = @document.at('div')
     end

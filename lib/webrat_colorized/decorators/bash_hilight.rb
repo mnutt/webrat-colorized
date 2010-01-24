@@ -32,7 +32,8 @@ module WebratColorized
 
       def bash_hilight_document
         children.map {|c|
-            c.bash_hilight
+           document.decorate(c)
+          c.bash_hilight
         }.join("")
       end
 
