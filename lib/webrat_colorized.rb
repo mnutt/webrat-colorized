@@ -34,7 +34,7 @@ module WebratColorized
 
   def self.colorize(html)
     parser = HTML5::HTMLParser.new(:tree => HTML5::TreeBuilders['simpletree'])
-    document = parser.parse_fragment(html) rescue parser.parse(html)
+    document = parser.parse_fragment(html)
     document.hilite
   end
 

@@ -7,29 +7,38 @@ module HTML5
           result = ""
           
           # Open tag
-          if self.respond_to?(:name) && name
-            result += " " * indent
-            result += Term::ANSIColor.red { "<" }
-            result += Term::ANSIColor.red { Term::ANSIColor.bold { name.to_s } }
-            
-            attributes.each do |name, value|
-              result += " " + Term::ANSIColor.magenta { name }
-              result += "="
-              result += Term::ANSIColor.cyan { "\"#{value}\"" }
-            end
-            result += Term::ANSIColor.red { ">#{newline}" }
+          result += " " * indent
+          result += Term::ANSIColor.red { "<" }
+          result += Term::ANSIColor.red { Term::ANSIColor.bold { name.to_s } }
+          
+          attributes.each do |name, value|
+            result += " " + Term::ANSIColor.magenta { name }
+            result += "="
+            result += Term::ANSIColor.cyan { "\"#{value}\"" }
           end
+          result += Term::ANSIColor.red { ">#{newline}" }
 
           # Children
           result += childNodes.map {|c| c.hilite(indent + 2, oneline) }.join("")
 
           # Closing tag
-          if self.respond_to?(:name) && name
-            result += " " * indent unless oneline
-            result += Term::ANSIColor.red { "</" }
-            result += Term::ANSIColor.red { Term::ANSIColor.bold { name.to_s } }
-            result += Term::ANSIColor.red { ">\n" }
+          result += " " * indent unless oneline
+          result += Term::ANSIColor.red { "</" }
+          result += Term::ANSIColor.red { Term::ANSIColor.bold { name.to_s } }
+          result += Term::ANSIColor.red { ">\n" }
+
+          # Don't indent if turned out to bue a short element
+          if(!oneline && result.size < 200)
+            hilite(indent, true)
+          else
+            result
           end
+        end
+      end
+
+      class DocumentFragment < Element
+        def hilite(indent=0, oneline=false)
+          result = childNodes.map {|c| c.hilite(indent + 2, oneline) }.join("")
 
           # Don't indent if turned out to bue a short element
           if(!oneline && result.size < 200)
